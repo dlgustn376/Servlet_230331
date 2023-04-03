@@ -90,7 +90,6 @@ public class CarInfo extends HttpServlet {
 		
 		Gson gson = new Gson();
 		List<Map<String, String>> requestMap = gson.fromJson(requestJson, List.class);
-//		System.out.println(requestMap);
 		
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
