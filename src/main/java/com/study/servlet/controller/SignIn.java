@@ -40,19 +40,20 @@ public class SignIn extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		User user = userService.getUser(username);
-		response.setContentType("application/json;charset=utf-0");
+		
+		response.setContentType("application/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
 		if(user == null) {
-			// 로그인 실패 1(아이디 찾을 수 없음.)
+			// 로그인 실패 1(아이디 찾을 수 없음)
 			ResponseDto<Boolean> responseDto = 
 					new ResponseDto<Boolean>(400, "사용자 인증 실패", false);
 			out.println(gson.toJson(responseDto));
 			return;
 		}
 		
-		if(user.getPassword().equals(password)) {
-			// 로그인 실패 2(비밀번호 틀림.)
+		if(!user.getPassword().equals(password)) {
+			// 로그인 실패 2(비밀번호 틀림)
 			ResponseDto<Boolean> responseDto = 
 					new ResponseDto<Boolean>(400, "사용자 인증 실패", false);
 			out.println(gson.toJson(responseDto));
