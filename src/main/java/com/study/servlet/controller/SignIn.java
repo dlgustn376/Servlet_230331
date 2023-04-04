@@ -16,7 +16,6 @@ import com.study.servlet.entity.User;
 import com.study.servlet.service.UserService;
 import com.study.servlet.service.UserServiceImpl;
 
-
 @WebServlet("/auth/signin")
 public class SignIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,17 +23,11 @@ public class SignIn extends HttpServlet {
 	private UserService userService;
 	private Gson gson;
 	
-	public SignIn() {
-		userService = UserServiceImpl.getInstance();
-		gson = new Gson();
-	}
-	
+    public SignIn() {
+    	userService = UserServiceImpl.getInstance();
+    	gson = new Gson();
+    }
 
-//	인증 관련만 POST
-//	basic login
-//	form login
-//	JWT 제이슨 웹 토큰 login
-	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -63,11 +56,16 @@ public class SignIn extends HttpServlet {
 		// 로그인 성공
 		HttpSession session = request.getSession();
 		session.setAttribute("AuthenticationPrincipal", user.getUserId());
-		
+		System.out.println("실행?");
 		ResponseDto<Boolean> responseDto = 
 				new ResponseDto<Boolean>(200, "사용자 인증 성공", true);
 		out.println(gson.toJson(responseDto));
-		
 	}
 
 }
+
+
+
+
+
+
